@@ -1,7 +1,7 @@
 package info
 
 import (
-	"gorm"
+	"github.com/Lyo-Shur/gorm"
 	"log"
 	"strings"
 )

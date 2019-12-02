@@ -8,7 +8,7 @@ SQLMapper内部使用map维持了一个数据库键和结构体键的映射，�
 package gorm
 
 import (
-	"gorm/tool"
+	"github.com/Lyo-Shur/gorm/tool"
 	"reflect"
 )
 

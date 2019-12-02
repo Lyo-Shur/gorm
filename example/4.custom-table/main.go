@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"gorm"
+	"github.com/Lyo-Shur/gorm"
 )
 
 // 使用自定义SQL的查询 返回结果为TABLE或MAP

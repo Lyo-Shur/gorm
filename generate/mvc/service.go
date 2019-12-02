@@ -2,8 +2,8 @@ package mvc
 
 import (
 	"errors"
-	"gorm"
-	"gorm/info"
+	"github.com/Lyo-Shur/gorm"
+	"github.com/Lyo-Shur/gorm/info"
 	"log"
 )
 

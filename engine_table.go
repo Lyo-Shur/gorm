@@ -7,7 +7,7 @@ package gorm
 
 import (
 	"database/sql"
-	"gorm/tool"
+	"github.com/Lyo-Shur/gorm/tool"
 	"reflect"
 )
 

@@ -1,8 +1,8 @@
 package mvc
 
 import (
-	"gorm"
-	"gorm/info"
+	"github.com/Lyo-Shur/gorm"
+	"github.com/Lyo-Shur/gorm/info"
 )
 
 // 定义DAO接口

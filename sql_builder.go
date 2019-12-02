@@ -7,7 +7,7 @@
 package gorm
 
 import (
-	"gorm/generate"
+	"github.com/Lyo-Shur/gorm/generate"
 	"regexp"
 	"strings"
 )

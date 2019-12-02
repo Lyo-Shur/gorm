@@ -1,8 +1,8 @@
 package mvc
 
 import (
-	"gorm/generate"
-	"gorm/info"
+	"github.com/Lyo-Shur/gorm/generate"
+	"github.com/Lyo-Shur/gorm/info"
 )
 
 const mapper = `

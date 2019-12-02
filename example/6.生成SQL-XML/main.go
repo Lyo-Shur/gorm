@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"gorm"
-	"gorm/generate/mvc"
-	"gorm/info"
+	"github.com/Lyo-Shur/gorm"
+	"github.com/Lyo-Shur/gorm/generate/mvc"
+	"github.com/Lyo-Shur/gorm/info"
 )
 
 // 生成SQL信息，可写出到文件

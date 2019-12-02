@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"gorm"
-	"gorm/example/5.custom-struct/model"
+	"github.com/Lyo-Shur/gorm"
+	"github.com/Lyo-Shur/gorm/example/5.custom-struct/model"
 )
 
 // 使用自定义SQL的查询 返回结果为结构体
