@@ -2,7 +2,7 @@ package generate
 
 import (
 	"bytes"
-	"github.com/Lyo-Shur/gorm/tool"
+	"github.com/Lyo-Shur/gorm/utils"
 	"log"
 	"strings"
 	"text/template"
@@ -43,9 +43,9 @@ func (builder *Builder) Execute(data interface{}) string {
 // 注册默认方法
 func (builder *Builder) init() {
 	builder.template.Funcs(template.FuncMap{
-		"BigHump":   tool.ToBigHump,
-		"SmallHump": tool.ToSmallHump,
-		"Underline": tool.ToUnderline,
+		"BigHump":   utils.ToBigHump,
+		"SmallHump": utils.ToSmallHump,
+		"Underline": utils.ToUnderline,
 		"ClearType": func(Type string) string {
 			return strings.Split(Type, "(")[0]
 		},

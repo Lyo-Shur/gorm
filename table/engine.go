@@ -1,13 +1,12 @@
 /*
-这里对client进行二次封装，简化查询操作
 表结构引擎与结构体引擎相比，无需传递具体结构体，针对无结构体查询使用
 */
 
-package gorm
+package table
 
 import (
 	"database/sql"
-	"github.com/Lyo-Shur/gorm/tool"
+	"github.com/Lyo-Shur/gorm/core"
 	"reflect"
 )
 
@@ -49,34 +48,27 @@ func (table *Table) ToMap() []map[string]interface{} {
 }
 
 // 表结构引擎
-type tableEngine struct {
-	engine
-}
-
-// 获取表结构引擎
-func TableEngine() *tableEngine {
-	engine := tableEngine{}
-	engine.UseDefault()
-	return &engine
+type Engine struct {
+	core.Engine
 }
 
 // ============================= 执行SQL方法 ============================ //
 
 // 查询方法 返回全部记录
-func (engine *tableEngine) Query(mapper *SQLMapper, query string, args []interface{}) (Table, error) {
+func (engine *Engine) Query(sql string, params []interface{}) (Table, error) {
 	// 执行查询
-	rows, err := Client.DBS[engine.clientAlias].Link.Query(query, args...)
+	rows, err := engine.DB.Query(sql, params...)
 	if err != nil {
 		return Table{}, err
 	}
 	// 返回映射结果
-	return rowsToTable(rows, mapper)
+	return rowsToTable(rows)
 }
 
 // ============================= 私有*辅助方法 ============================ //
 
 // 自动映射查询结果 sql.Rows转为Table
-func rowsToTable(rows *sql.Rows, mapper *SQLMapper) (Table, error) {
+func rowsToTable(rows *sql.Rows) (Table, error) {
 	var table Table
 	for rows.Next() {
 		// 读取所有的列信息
@@ -92,13 +84,8 @@ func rowsToTable(rows *sql.Rows, mapper *SQLMapper) (Table, error) {
 		valuePointer := make([]interface{}, l)
 		// 遍历所有的列信息
 		for i := 0; i < l; i++ {
-			// 转换列名
-			key := mapper.Get(table.Key[i])
-			if key != "" {
-				table.Key[i] = key
-			} else {
-				table.Key[i] = tool.ToBigHump(table.Key[i])
-			}
+			// 记录列名
+			table.Key[i] = table.Key[i]
 			// 储存指针
 			valuePointer[i] = &value[i]
 		}

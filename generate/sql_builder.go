@@ -4,10 +4,9 @@
 2.为了处理代码生成器生成UPDATE语句时，逗号的处理问题，添加了 WHERE 前的逗号检查
 */
 
-package gorm
+package generate
 
 import (
-	"github.com/Lyo-Shur/gorm/generate"
 	"regexp"
 	"strings"
 )
@@ -17,7 +16,7 @@ func SQLBuilder(sqlTemplate string, parameter interface{}) (string, []interface{
 	// 获取SQL模板并执行预处理
 	st := parsing(sqlTemplate)
 	// 对模板进行解释
-	s := generate.GetBuilder(st).Execute(parameter)
+	s := GetBuilder(st).Execute(parameter)
 	// 提取模板中的语句以及参数
 	sql, is := extractParameters(s)
 	// 清洗SQL

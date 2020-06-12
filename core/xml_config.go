@@ -6,7 +6,7 @@ xml_config是解析sql配置xml文件而生成的对象
 xml_config只是为了解析xml存在，自身不参与功能
 */
 
-package gorm
+package core
 
 import (
 	"encoding/xml"
@@ -16,7 +16,7 @@ import (
 // 定义xml根元素
 // CPS Column和Parameter的映射关系 数组
 // KVS SQL的键和SQL的值对应关系 数组
-type xmlConfig struct {
+type XmlConfig struct {
 	// 映射数组
 	CPS []cp `xml:"mapper"`
 	// 键值数组
@@ -40,9 +40,9 @@ type kv struct {
 }
 
 // 初始化配置
-func XmlConfig(str string) xmlConfig {
+func GetXmlConfig(str string) XmlConfig {
 	// 保存内容结构体
-	x := xmlConfig{}
+	x := XmlConfig{}
 	// 读取配置文件并缓存到结构体
 	err := xml.Unmarshal([]byte(str), &x)
 	if err != nil {

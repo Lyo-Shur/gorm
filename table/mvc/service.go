@@ -2,16 +2,15 @@ package mvc
 
 import (
 	"errors"
-	"github.com/Lyo-Shur/gorm"
-	"github.com/Lyo-Shur/gorm/info"
+	"github.com/Lyo-Shur/gorm/table"
 	"log"
 )
 
 // 定义Service接口
 type Service interface {
-	GetList(attr interface{}) (gorm.Table, error)
+	GetList(attr interface{}) (table.Table, error)
 	GetCount(attr interface{}) (int64, error)
-	GetModel(attr interface{}) (gorm.Table, error)
+	GetModel(attr interface{}) (table.Table, error)
 	Update(attr interface{}) (int64, error)
 	Insert(attr interface{}) (int64, error)
 	Delete(attr interface{}) (int64, error)
@@ -23,20 +22,20 @@ type serviceImpl struct {
 }
 
 // 获取service层
-func GetService(db info.DataBase, tableName string) Service {
+func GetService(dao DAO) Service {
 	impl := serviceImpl{}
-	impl.dao = GetDAO(db, tableName)
+	impl.dao = dao
 	return &impl
 }
 
 // 查询列表方法
-func (serviceImpl *serviceImpl) GetList(attr interface{}) (gorm.Table, error) {
-	table, err := serviceImpl.dao.GetList(attr)
+func (serviceImpl *serviceImpl) GetList(attr interface{}) (table.Table, error) {
+	data, err := serviceImpl.dao.GetList(attr)
 	if err != nil {
 		log.Println(err)
-		return table, errors.New("system error")
+		return data, errors.New("system error")
 	}
-	return table, nil
+	return data, nil
 }
 
 // 查询条数方法
@@ -50,13 +49,13 @@ func (serviceImpl *serviceImpl) GetCount(attr interface{}) (int64, error) {
 }
 
 // 查询实体方法
-func (serviceImpl *serviceImpl) GetModel(attr interface{}) (gorm.Table, error) {
-	table, err := serviceImpl.dao.GetModel(attr)
+func (serviceImpl *serviceImpl) GetModel(attr interface{}) (table.Table, error) {
+	data, err := serviceImpl.dao.GetModel(attr)
 	if err != nil {
 		log.Println(err)
-		return table, errors.New("system error")
+		return data, errors.New("system error")
 	}
-	return table, nil
+	return data, nil
 }
 
 // 更新记录方法

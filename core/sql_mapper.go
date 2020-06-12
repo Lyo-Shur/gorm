@@ -5,10 +5,10 @@ SQLMapper内部使用map维持了一个数据库键和结构体键的映射，�
 	2.来自手动添加的映射关系
 */
 
-package gorm
+package core
 
 import (
-	"github.com/Lyo-Shur/gorm/tool"
+	"github.com/Lyo-Shur/gorm/utils"
 	"reflect"
 )
 
@@ -57,7 +57,7 @@ func addMapper(t reflect.Type, m map[string]string) {
 		// 得到当前字段名
 		v := structFileId.Name
 		// 转化为下划线风格当作键
-		k := tool.ToUnderline(v)
+		k := utils.ToUnderline(v)
 		// 保存进MAP
 		m[k] = v
 		// 递归检查子结构体 如果当前字段是一个结构体，递归调用

@@ -5,7 +5,7 @@ SQLHolder内部使用map维持了一个SQL-ID和具体SQL的映射，主要用�
 	2.来自代码生成器生成的SQL语句
 */
 
-package gorm
+package core
 
 type SQLHolder struct {
 	// 映射关系

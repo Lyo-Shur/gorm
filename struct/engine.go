@@ -1,33 +1,26 @@
 /*
-这里对client进行二次封装，简化查询操作
 结构体引擎主要使用在MVC框架中
 */
 
-package gorm
+package _struct
 
 import (
 	"database/sql"
+	"github.com/Lyo-Shur/gorm/core"
 	"reflect"
 )
 
 // 结构体引擎
-type structEngine struct {
-	engine
-}
-
-// 获取结构体引擎
-func StructEngine() *structEngine {
-	engine := structEngine{}
-	engine.UseDefault()
-	return &engine
+type Engine struct {
+	core.Engine
 }
 
 // ============================= 执行SQL方法 ============================ //
 
 // 查询方法 返回全部记录
-func (engine *structEngine) Query(model interface{}, mapper *SQLMapper, query string, args []interface{}) ([]reflect.Value, error) {
+func (engine *Engine) Query(model interface{}, mapper *core.SQLMapper, sql string, params []interface{}) ([]reflect.Value, error) {
 	// 执行查询
-	rows, err := Client.DBS[engine.clientAlias].Link.Query(query, args...)
+	rows, err := engine.DB.Query(sql, params...)
 	if err != nil {
 		return nil, err
 	}
@@ -36,8 +29,8 @@ func (engine *structEngine) Query(model interface{}, mapper *SQLMapper, query st
 }
 
 // 查询方法 返回第一条记录
-func (engine *structEngine) QueryFirst(model interface{}, mapper *SQLMapper, query string, args []interface{}) (reflect.Value, error) {
-	vs, err := engine.Query(model, mapper, query, args)
+func (engine *Engine) QueryFirst(model interface{}, mapper *core.SQLMapper, sql string, params []interface{}) (reflect.Value, error) {
+	vs, err := engine.Query(model, mapper, sql, params)
 	if err != nil {
 		tp := reflect.TypeOf(model)
 		return reflect.New(tp), err
@@ -52,7 +45,7 @@ func (engine *structEngine) QueryFirst(model interface{}, mapper *SQLMapper, que
 // ============================= 私有*辅助方法 ============================ //
 
 // 自动映射查询结果 sql.Rows转为reflect.Value
-func rowsToValues(rows *sql.Rows, reflectType reflect.Type, m *SQLMapper) ([]reflect.Value, error) {
+func rowsToValues(rows *sql.Rows, reflectType reflect.Type, m *core.SQLMapper) ([]reflect.Value, error) {
 	// 创建返回的数组
 	var returnList []reflect.Value
 

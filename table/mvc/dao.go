@@ -1,15 +1,14 @@
 package mvc
 
 import (
-	"github.com/Lyo-Shur/gorm"
-	"github.com/Lyo-Shur/gorm/info"
+	"github.com/Lyo-Shur/gorm/table"
 )
 
 // 定义DAO接口
 type DAO interface {
-	GetList(attr interface{}) (gorm.Table, error)
+	GetList(attr interface{}) (table.Table, error)
 	GetCount(attr interface{}) (int64, error)
-	GetModel(attr interface{}) (gorm.Table, error)
+	GetModel(attr interface{}) (table.Table, error)
 	Update(attr interface{}) (int64, error)
 	Insert(attr interface{}) (int64, error)
 	Delete(attr interface{}) (int64, error)
@@ -17,20 +16,18 @@ type DAO interface {
 
 // dao层结构体
 type daoImpl struct {
-	tableManager *gorm.TableManager
+	tableManager *table.Manager
 }
 
 // 获取dao层
-func GetDAO(db info.DataBase, tableName string) DAO {
+func GetDAO(tableManager *table.Manager) DAO {
 	daoImpl := daoImpl{}
-	xml := GetMapperXML(db, tableName)
-	daoImpl.tableManager = gorm.GetTableManager(gorm.XmlConfig(xml))
-	daoImpl.tableManager.Engine.Use(db.Alias)
+	daoImpl.tableManager = tableManager
 	return &daoImpl
 }
 
 // 查询列表方法
-func (daoImpl *daoImpl) GetList(attr interface{}) (gorm.Table, error) {
+func (daoImpl *daoImpl) GetList(attr interface{}) (table.Table, error) {
 	return daoImpl.tableManager.Query("GetList", attr)
 }
 
@@ -40,7 +37,7 @@ func (daoImpl *daoImpl) GetCount(attr interface{}) (int64, error) {
 }
 
 // 查询实体方法
-func (daoImpl *daoImpl) GetModel(attr interface{}) (gorm.Table, error) {
+func (daoImpl *daoImpl) GetModel(attr interface{}) (table.Table, error) {
 	return daoImpl.tableManager.Query("GetModel", attr)
 }
 
