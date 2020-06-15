@@ -20,12 +20,19 @@ type Engine struct {
 // 查询方法 返回全部记录
 func (engine *Engine) Query(model interface{}, mapper *core.SQLMapper, sql string, params []interface{}) ([]reflect.Value, error) {
 	// 执行查询
+	engine.Logger.PrintInfo(sql, params)
 	rows, err := engine.DB.Query(sql, params...)
 	if err != nil {
+		engine.Logger.PrintError(err)
 		return nil, err
 	}
 	// 返回映射结果
-	return rowsToValues(rows, reflect.TypeOf(model), mapper)
+	values, err := rowsToValues(rows, reflect.TypeOf(model), mapper)
+	if err != nil {
+		engine.Logger.PrintError(err)
+		return values, err
+	}
+	return values, nil
 }
 
 // 查询方法 返回第一条记录

@@ -57,12 +57,19 @@ type Engine struct {
 // 查询方法 返回全部记录
 func (engine *Engine) Query(sql string, params []interface{}) (Table, error) {
 	// 执行查询
+	engine.Logger.PrintInfo(sql, params)
 	rows, err := engine.DB.Query(sql, params...)
 	if err != nil {
+		engine.Logger.PrintError(err)
 		return Table{}, err
 	}
 	// 返回映射结果
-	return rowsToTable(rows)
+	table, err := rowsToTable(rows)
+	if err != nil {
+		engine.Logger.PrintError(err)
+		return table, err
+	}
+	return table, nil
 }
 
 // ============================= 私有*辅助方法 ============================ //
