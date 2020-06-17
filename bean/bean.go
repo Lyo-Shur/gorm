@@ -3,7 +3,7 @@
 负责查询的实体，可选择组合Page结构体，来拥有分页查询功能
 */
 
-package gorm
+package bean
 
 // 不使用分页
 var closePaging int64 = -1
