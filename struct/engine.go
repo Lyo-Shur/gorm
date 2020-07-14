@@ -6,7 +6,7 @@ package _struct
 
 import (
 	"database/sql"
-	"github.com/Lyo-Shur/gorm/core"
+	"github.com/lyoshur/gorm/core"
 	"reflect"
 )
 

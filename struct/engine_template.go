@@ -1,8 +1,8 @@
 package _struct
 
 import (
-	"github.com/Lyo-Shur/gorm/core"
-	"github.com/Lyo-Shur/gorm/generate"
+	"github.com/lyoshur/gorm/core"
+	"github.com/lyoshur/gorm/generate"
 	"reflect"
 )
 

@@ -1,7 +1,7 @@
 package table
 
 import (
-	"github.com/Lyo-Shur/gorm/generate"
+	"github.com/lyoshur/gorm/generate"
 )
 
 // 结构体模板引擎

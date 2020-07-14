@@ -2,7 +2,7 @@ package generate
 
 import (
 	"bytes"
-	"github.com/Lyo-Shur/gorm/utils"
+	"github.com/lyoshur/gorm/utils"
 	"log"
 	"strings"
 	"text/template"

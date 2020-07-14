@@ -2,7 +2,7 @@ package mvc
 
 import (
 	"errors"
-	"github.com/Lyo-Shur/gorm/table"
+	"github.com/lyoshur/gorm/table"
 	"log"
 )
 

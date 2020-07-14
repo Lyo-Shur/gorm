@@ -1,13 +1,13 @@
 package gorm
 
 import (
-	"github.com/Lyo-Shur/gorm/bean"
-	"github.com/Lyo-Shur/gorm/core"
-	"github.com/Lyo-Shur/gorm/generate"
-	"github.com/Lyo-Shur/gorm/struct"
-	"github.com/Lyo-Shur/gorm/table"
-	"github.com/Lyo-Shur/gorm/table/mvc"
-	"github.com/Lyo-Shur/gorm/utils"
+	"github.com/lyoshur/gorm/bean"
+	"github.com/lyoshur/gorm/core"
+	"github.com/lyoshur/gorm/generate"
+	"github.com/lyoshur/gorm/struct"
+	"github.com/lyoshur/gorm/table"
+	"github.com/lyoshur/gorm/table/mvc"
+	"github.com/lyoshur/gorm/utils"
 )
 
 // 实体

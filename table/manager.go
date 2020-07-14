@@ -1,8 +1,8 @@
 package table
 
 import (
-	"github.com/Lyo-Shur/gorm/core"
-	"github.com/Lyo-Shur/gorm/utils"
+	"github.com/lyoshur/gorm/core"
+	"github.com/lyoshur/gorm/utils"
 )
 
 // 数据库ORM管理者
