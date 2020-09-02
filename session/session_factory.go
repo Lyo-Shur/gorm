@@ -25,7 +25,8 @@ func (factory *Factory) TxSession() (TxSession, error) {
 	if err != nil {
 		return TxSession{}, err
 	}
-	txEngine := tx.Engine{}.Init(Tx).SetLogger(factory.Logger)
+	txEngine := &(tx.Engine{})
+	txEngine.Init(Tx).SetLogger(factory.Logger)
 	return TxSession{
 		Tx:               Tx,
 		TxTemplateEngine: tx.GetTemplateEngine(txEngine),
