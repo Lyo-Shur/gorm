@@ -5,34 +5,25 @@
 
 package core
 
-import (
-	"database/sql"
-	"log"
-)
+import "database/sql"
 
 // 查询引擎
 type Engine struct {
-	// 日志
-	Logger Logger
 	// 数据库连接
 	DB *sql.DB
+	// 日志
+	Logger Logger
 }
 
-// 初始化数据库连接
-func (engine *Engine) InitDB(driverName, dataSourceName string) *Engine {
-	engine.Logger = &PrintLogger{}
-	db, err := sql.Open(driverName, dataSourceName)
-	if err != nil {
-		log.Fatal(err)
-	}
+// 初始化引擎
+func (engine *Engine) Init(db *sql.DB) {
 	engine.DB = db
-	return engine
+	engine.Logger = &PrintLogger{}
 }
 
 // 设置日志
-func (engine *Engine) SetLogger(logger Logger) *Engine {
+func (engine *Engine) SetLogger(logger Logger) {
 	engine.Logger = logger
-	return engine
 }
 
 // 统计数量

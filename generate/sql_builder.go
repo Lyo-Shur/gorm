@@ -64,6 +64,7 @@ func parsing(str string) string {
 func extractParameters(str string) (string, []interface{}) {
 
 	// 创建正则表达式
+	//noinspection RegExpRedundantEscape
 	exp2 := regexp.MustCompile(`(<!\[Parameter\[)((.|\s|\S)*?)(\]\]>)`)
 
 	// 对原始字符串进行匹配
@@ -93,11 +94,13 @@ func extractParameters(str string) (string, []interface{}) {
 // 处理update语句中可能的错误逗号
 func dealWithUpdate(sql string) string {
 	// sql 语句转大写
+	//noinspection SpellCheckingInspection
 	uper := strings.ToUpper(sql)
 	// 如果其中包含 UPDATE 关键字 即是更新语句的话
 	// 并且包含 WHERE 关键字
 	if strings.Contains(uper, "UPDATE") && strings.Contains(uper, "WHERE") {
 		// 从 WHERE 的位置向前查找
+		//noinspection SpellCheckingInspection
 		upers := []rune(uper)
 		index := strings.Index(uper, "WHERE") - 1
 		for index > 0 {
