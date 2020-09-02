@@ -14,7 +14,7 @@ type Factory struct {
 	// 数据库连接
 	DB *sql.DB
 	// 日志
-	logger core.Logger
+	Logger core.Logger
 	// 会话
 	Session Session
 }
@@ -25,7 +25,7 @@ func (factory *Factory) TxSession() (TxSession, error) {
 	if err != nil {
 		return TxSession{}, err
 	}
-	txEngine := tx.Engine{}.Init(Tx).SetLogger(factory.logger)
+	txEngine := tx.Engine{}.Init(Tx).SetLogger(factory.Logger)
 	return TxSession{
 		Tx:               Tx,
 		TxTemplateEngine: tx.GetTemplateEngine(txEngine),
@@ -70,7 +70,7 @@ func (fb *FactoryBuilder) Build() *Factory {
 
 	return &Factory{
 		DB:     fb.DB,
-		logger: fb.Logger,
+		Logger: fb.Logger,
 		Session: Session{
 			TableTemplateEngine:  table.GetTemplateEngine(&tableEngine),
 			StructTemplateEngine: _struct.GetTemplateEngine(&structEngine),
