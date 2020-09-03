@@ -34,7 +34,7 @@ type TableEngine = table.Engine
 type TxEngine = tx.Engine
 
 // 获取结构体模板引擎
-//noinspection SpellCheckingInspection
+//noinspection SpellCheckingInspection,GoUnusedExportedFunction
 func GetStructTemplateEngine(structEngine *_struct.Engine) *_struct.TemplateEngine {
 	return _struct.GetTemplateEngine(structEngine)
 }
@@ -53,6 +53,7 @@ func GetStructManagerByString(structTemplateEngine *_struct.TemplateEngine, xmlC
 }
 
 // 获取Table模板引擎
+//noinspection GoUnusedExportedFunction
 func GetTableTemplateEngine(tableEngine *table.Engine) *table.TemplateEngine {
 	return table.GetTemplateEngine(tableEngine)
 }
